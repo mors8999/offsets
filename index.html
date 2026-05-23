@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,7 +10,7 @@ body {
     margin: 0;
     padding: 20px;
     background: #121212;
-    color: #ffffff;
+    color: white;
     font-family: Arial, sans-serif;
 }
 
@@ -18,10 +18,10 @@ button {
     background: #2d6cdf;
     color: white;
     border: none;
-    padding: 10px 15px;
+    padding: 10px 14px;
+    border-radius: 5px;
     cursor: pointer;
     margin-bottom: 10px;
-    border-radius: 5px;
 }
 
 button:hover {
@@ -29,11 +29,11 @@ button:hover {
 }
 
 pre {
-    white-space: pre-wrap;
-    word-wrap: break-word;
     background: #1e1e1e;
     padding: 15px;
     border-radius: 5px;
+    white-space: pre-wrap;
+    word-break: break-word;
 }
 </style>
 </head>
@@ -50,15 +50,21 @@ let content = "";
 async function load() {
     try {
         const res = await fetch("https://offsets.imtheo.lol/Offsets.hpp");
+
+        if (!res.ok) throw new Error("HTTP " + res.status);
+
         content = await res.text();
+
         document.getElementById("text").textContent = content;
+
     } catch (e) {
-        document.getElementById("text").textContent = "Failed to load text";
+        document.getElementById("text").textContent =
+            "Failed to load text:\n\n" + e;
     }
 }
 
 function copyText() {
-    navigator.clipboard.writeText(content);
+    navigator.clipboard.writeText(content || "");
 }
 
 load();
