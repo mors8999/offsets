@@ -14,20 +14,6 @@ body {
     font-family: Arial, sans-serif;
 }
 
-button {
-    background: #2d6cdf;
-    color: white;
-    border: none;
-    padding: 10px 14px;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-bottom: 10px;
-}
-
-button:hover {
-    background: #1f4fb8;
-}
-
 pre {
     background: #1e1e1e;
     padding: 15px;
@@ -40,35 +26,11 @@ pre {
 
 <body>
 
-<button onclick="copyText()">Copy</button>
+<pre>
+Loading...
 
-<pre id="text">Loading...</pre>
-
-<script>
-let content = "";
-
-async function load() {
-    try {
-        const res = await fetch("https://offsets.imtheo.lol/Offsets.hpp");
-
-        if (!res.ok) throw new Error("HTTP " + res.status);
-
-        content = await res.text();
-
-        document.getElementById("text").textContent = content;
-
-    } catch (e) {
-        document.getElementById("text").textContent =
-            "Failed to load text:\n\n" + e;
-    }
-}
-
-function copyText() {
-    navigator.clipboard.writeText(content || "");
-}
-
-load();
-</script>
+(No JavaScript version — static page only)
+</pre>
 
 </body>
 </html>
