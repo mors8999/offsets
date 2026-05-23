@@ -1,29 +1,24 @@
-const proxyUrl =
-  "https://r.jina.ai/http://offsets.imtheo.lol/Offsets.hpp";
-
+const url =
+  "https://corsproxy.io/?" +
+  encodeURIComponent("https://offsets.imtheo.lol/Offsets.hpp");
 let content = "";
 
 async function loadOffsets() {
   try {
-    const res = await fetch(proxyUrl);
+    const res = await fetch(url);
+    const text = await res.text();
 
-    if (!res.ok) {
-      throw new Error("HTTP " + res.status);
-    }
+    content = text;
+    document.getElementById("text").textContent = text;
 
-    content = await res.text();
-
-    document.getElementById("text").textContent = content;
-
-  } catch (err) {
+  } catch (e) {
     document.getElementById("text").textContent =
-      "FAILED TO LOAD OFFSETS\n\n" + err;
+      "FAILED: " + e;
   }
 }
 
 function copyText() {
-  if (!content) return;
-  navigator.clipboard.writeText(content);
+  navigator.clipboard.writeText(content || "");
 }
 
 loadOffsets();
