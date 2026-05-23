@@ -16,18 +16,26 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Download file
+      - name: Download offsets
         run: curl -L "https://offsets.imtheo.lol/Offsets.hpp" -o offsets_raw.txt
 
-      - name: Clean file
+      - name: Clean header block
         run: |
-          cat offsets_raw.txt \
-          | grep -v "Dumped By" \
-          | grep -v "imtheo.lol" \
-          | grep -v "RbxDumperV2" \
-          | grep -v "Join the discord" \
-          | grep -v "discord.gg" \
-          > offsets.txt
+          awk '
+          BEGIN { skip=0 }
+
+          # start of big header block
+          /\* =+/ { skip=1; next }
+
+          # end of header block (final */ line)
+          skip==1 && /\*\// { skip=0; next }
+
+          # skip everything inside header
+          skip==1 { next }
+
+          # output everything else
+          { print }
+          ' offsets_raw.txt > offsets.txt
 
       - name: Commit changes
         run: |
