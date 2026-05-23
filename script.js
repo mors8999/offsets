@@ -1,6 +1,5 @@
 const proxyUrl =
-  "https://api.allorigins.win/raw?url=" +
-  encodeURIComponent("https://offsets.imtheo.lol/Offsets.hpp");
+  "https://r.jina.ai/http://offsets.imtheo.lol/Offsets.hpp";
 
 let content = "";
 
@@ -9,7 +8,7 @@ async function loadOffsets() {
     const res = await fetch(proxyUrl);
 
     if (!res.ok) {
-      throw new Error("HTTP error: " + res.status);
+      throw new Error("HTTP " + res.status);
     }
 
     content = await res.text();
@@ -18,13 +17,12 @@ async function loadOffsets() {
 
   } catch (err) {
     document.getElementById("text").textContent =
-      "Failed to load offsets:\n\n" + err;
+      "FAILED TO LOAD OFFSETS\n\n" + err;
   }
 }
 
 function copyText() {
   if (!content) return;
-
   navigator.clipboard.writeText(content);
 }
 
