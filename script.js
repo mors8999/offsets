@@ -1,26 +1,31 @@
-async function getData() {
+const proxyUrl =
+  "https://api.allorigins.win/raw?url=" +
+  encodeURIComponent("https://offsets.imtheo.lol/Offsets.hpp");
+
+let content = "";
+
+async function loadOffsets() {
   try {
+    const res = await fetch(proxyUrl);
 
-    const url =
-      "https://corsproxy.io/?https://offsets.imtheo.lol/Offsets.hpp";
+    if (!res.ok) {
+      throw new Error("HTTP error: " + res.status);
+    }
 
-    const res = await fetch(url);
+    content = await res.text();
 
-    const html = await res.text();
-
-    let text = html.replace(/<[^>]*>/g, "");
-
-    text = text.toUpperCase();
-
-    document.getElementById("output").innerText =
-      text.slice(0, 2000);
+    document.getElementById("text").textContent = content;
 
   } catch (err) {
-
-    document.getElementById("output").innerText =
-      err;
-
+    document.getElementById("text").textContent =
+      "Failed to load offsets:\n\n" + err;
   }
 }
 
-getData();
+function copyText() {
+  if (!content) return;
+
+  navigator.clipboard.writeText(content);
+}
+
+loadOffsets();
