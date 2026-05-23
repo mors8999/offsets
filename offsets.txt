@@ -6,8 +6,8 @@ namespace Offsets {
     inline std::string ClientVersion = "version-4b6315bf1f0a4dbb";
 
     namespace AirProperties {
-         inline constexpr uintptr_t AirDensity = 0x18;
-         inline constexpr uintptr_t GlobalWind = 0x3c;
+         inline constexpr uintptr_t AirDensity = 0x0;
+         inline constexpr uintptr_t GlobalWind = 0x0;
     }
 
     namespace AnimationTrack {
@@ -183,7 +183,7 @@ namespace Offsets {
          inline constexpr uintptr_t Text = 0xda8;
          inline constexpr uintptr_t TextColor3 = 0xe58;
          inline constexpr uintptr_t Visible = 0x5b5;
-         inline constexpr uintptr_t ZIndex = 0x19b;
+         inline constexpr uintptr_t ZIndex = 0x5ac;
     }
 
     namespace Humanoid {
@@ -573,15 +573,15 @@ namespace Offsets {
          inline constexpr uintptr_t CurrentCamera = 0x4b0;
          inline constexpr uintptr_t DistributedGameTime = 0x4d0;
          inline constexpr uintptr_t ReadOnlyGravity = 0x9e0;
-         inline constexpr uintptr_t World = 0x408;
+         inline constexpr uintptr_t World = 0x378;
     }
 
     namespace World {
-         inline constexpr uintptr_t AirProperties = 0x218;
-         inline constexpr uintptr_t FallenPartsDestroyHeight = 0x208;
-         inline constexpr uintptr_t Gravity = 0x210;
-         inline constexpr uintptr_t Primitives = 0x280;
-         inline constexpr uintptr_t worldStepsPerSec = 0x678;
+         inline constexpr uintptr_t AirProperties = 0x0;
+         inline constexpr uintptr_t FallenPartsDestroyHeight = 0x0;
+         inline constexpr uintptr_t Gravity = 0x1a8;
+         inline constexpr uintptr_t Primitives = 0x0;
+         inline constexpr uintptr_t worldStepsPerSec = 0x0;
     }
 
 }
