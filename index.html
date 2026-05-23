@@ -1,1 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>offsets</title>
 
+<style>
+body {
+    margin: 0;
+    padding: 20px;
+    background: #121212;
+    color: white;
+    font-family: Arial;
+}
+
+pre {
+    white-space: pre-wrap;
+    word-break: break-word;
+    background: #1e1e1e;
+    padding: 15px;
+    border-radius: 5px;
+}
+
+button {
+    margin-bottom: 10px;
+    padding: 10px;
+    background: #2d6cdf;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+</style>
+</head>
+
+<body>
+
+<button onclick="copyText()">Copy</button>
+
+<pre id="text">Loading...</pre>
+
+<script>
+let data = "";
+
+fetch("offsets.txt")
+  .then(r => r.text())
+  .then(t => {
+    data = t;
+    document.getElementById("text").textContent = t;
+  });
+
+function copyText() {
+  navigator.clipboard.writeText(data);
+}
+</script>
+
+</body>
+</html>
