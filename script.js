@@ -1,20 +1,25 @@
 async function getData() {
   try {
-    const res = await fetch("https://offsets.imtheo.lol/Offsets.hpp"); 
+
+    const url =
+      "https://corsproxy.io/?https://offsets.imtheo.lol/Offsets.hpp";
+
+    const res = await fetch(url);
+
     const html = await res.text();
 
-    // extract text (super basic method)
     let text = html.replace(/<[^>]*>/g, "");
 
-    // modify it however you want
     text = text.toUpperCase();
-    text = "🔥 MODDED TEXT 🔥\n\n" + text.slice(0, 1000);
 
-    document.getElementById("output").innerText = text;
+    document.getElementById("output").innerText =
+      text.slice(0, 2000);
 
   } catch (err) {
+
     document.getElementById("output").innerText =
-      "Failed (CORS probably blocked it): " + err;
+      err;
+
   }
 }
 
