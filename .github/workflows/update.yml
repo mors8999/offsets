@@ -1,0 +1,25 @@
+name: Update Offsets
+
+on:
+  schedule:
+    - cron: "*/10 * * * *"
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Download file
+        run: curl -L "https://offsets.imtheo.lol/Offsets.hpp" -o offsets.txt
+
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add offsets.txt
+          git commit -m "update offsets" || echo "no changes"
+          git push
